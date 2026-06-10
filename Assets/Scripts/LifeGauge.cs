@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using R3;
-using R3.Triggers;
+//using R3.Triggers;
 
 
 public class LifeGauge : MonoBehaviour
