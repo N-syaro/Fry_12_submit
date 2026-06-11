@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
 
     bool Isdamage = false;
     private bool isInvincible = false; // 無敵フラグ
+    private bool isend = false; 
     private CancellationTokenSource blinkCts; // 点滅キャンセル用
 
     void Start()
@@ -60,9 +61,12 @@ public class Player : MonoBehaviour
         if (JumpCountImage2 != null)
             orig_Coler2 = JumpCountImage2.color;
     }
-
     void Update()
     {
+        if(isend)
+        {
+            return;
+        }
         if(Isdamage == false)
         {
             this.transform.position += new Vector3(step * Time.deltaTime, 0, 0);
@@ -92,7 +96,6 @@ public class Player : MonoBehaviour
             }
         }
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Floor")
@@ -110,7 +113,6 @@ public class Player : MonoBehaviour
             }
         }
     }
-
     /// <summary>
     /// ダメージ処理：ノックバック ＋ 点滅 ＋ 無敵時間
     /// </summary>
@@ -179,5 +181,12 @@ public class Player : MonoBehaviour
     {
         blinkCts?.Cancel();
         blinkCts?.Dispose();
+    }
+    public void IsEnd(bool i)
+    {
+        if(i)
+        {
+            isend = true;
+        }
     }
 }
